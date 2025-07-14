@@ -1,0 +1,4 @@
+export enum ReturnEligibility {
+  MAKE_RETURNABLE = 'MAKE_RETURNABLE',
+  MAKE_NON_RETURNABLE = 'MAKE_NON_RETURNABLE',
+}

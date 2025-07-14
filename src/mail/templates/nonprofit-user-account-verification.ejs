@@ -1,0 +1,14 @@
+<p>Hello <%= name %>,</p>
+<p>Thank you for joining us. Below is your user dashboard account details,</p>
+
+<p>
+  Email: <%= user_email %><br />
+  Username: <%= username %><br />
+  Brand url: <%= brand_url %>
+</p>
+
+<p>
+  <a href="<%= verificationLink %>">Approve</a>
+</p>
+
+<%- include('./partials/footer'); %>

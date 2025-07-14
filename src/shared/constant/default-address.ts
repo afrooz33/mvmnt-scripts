@@ -1,0 +1,7 @@
+export default {
+  MVMNT_ADDRESS_COUNTRY: 'Japan',
+  MVMNT_ADDRESS_POSTCODE: '132-0062',
+  MVMNT_ADDRESS_PREFECTURE: 'Tokyo',
+  MVMNT_ADDRESS_CITY: 'Koto-ku',
+  MVMNT_ADDRESS_STREET: 'Shinonome',
+}

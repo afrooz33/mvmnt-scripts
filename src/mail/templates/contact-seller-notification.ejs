@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= subject %></title>
+    <style>
+      body {
+        font-family: sans-serif;
+        line-height: 1.5;
+        color: #333;
+      }
+      .container {
+        padding: 20px;
+        border: 1px solid #eee;
+        max-width: 600px;
+        margin: 20px auto;
+      }
+      .button {
+        display: inline-block;
+        padding: 10px 15px;
+        background-color: #007bff;
+        color: #ffffff;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 15px;
+      }
+      .message-excerpt {
+        background-color: #f8f9fa;
+        border-left: 3px solid #dee2e6;
+        padding: 10px;
+        margin: 15px 0;
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>New Message Regarding Order #<%= orderId %></h2>
+
+      <p>Hello <%= username %>,</p>
+
+      <p>
+        You have received a new message from <strong><%= buyerName %></strong> regarding your
+        order #<%= orderId %>.
+      </p>
+
+      <p>Message Excerpt:</p>
+      <div class="message-excerpt"><%- messageExcerpt %></div>
+
+      <p>
+        Please log in to your account to view the full message and respond.
+      </p>
+
+      <a href="<%= linkToRequest %>" class="button">View Request</a>
+
+      <p>Thank you,<br />MVMNT</p>
+    </div>
+  </body>
+</html>

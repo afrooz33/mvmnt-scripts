@@ -1,0 +1,102 @@
+import { ExportToCsv } from 'export-to-csv'
+import { HandleErrors } from '@app/src/shared/helpers/Error.helper'
+import { GetDateFilterRange, GetDaysDifference } from '@app/src/shared/helpers/Date.helper'
+import { DateFilterQueryDto } from '@app/src/admin/analytics/dto'
+import { DonationType } from '@app/src/donations/enums'
+
+const queryBuilder = (query: DateFilterQueryDto): string => {
+  let day_groupby = ''
+  let day_groupby_select = ''
+  let day_select = ''
+  let order_by = ''
+  let left_join = ''
+
+  const { start, end } = GetDateFilterRange(query?.date_filter?.start, query?.date_filter?.end)
+  const daysDifference = GetDaysDifference(start, end)
+
+  if (daysDifference <= 120) {
+    day_groupby = ', EXTRACT(DAY FROM "d"."created")'
+    day_groupby_select = 'EXTRACT(DAY FROM "d"."created") AS day,'
+    day_select = 'EXTRACT(DAY FROM ds.dates) AS day,'
+    order_by = ', day'
+    left_join = 'AND EXTRACT(DAY FROM "ds"."dates") = gd.day'
+  }
+
+  return `WITH date_series AS (
+      SELECT generate_series(
+        '${start}'::DATE,
+        '${end}'::DATE,
+        CASE 
+          WHEN ('${end}'::date - '${start}'::date) <= 120 THEN '1 day'::interval
+          ELSE '1 month'::interval
+        END
+      )::DATE AS dates
+    ),
+    grouped_donations AS (
+      SELECT
+        EXTRACT(YEAR FROM "d"."created") AS year,
+        EXTRACT(MONTH FROM "d"."created") AS month,
+        ${day_groupby_select}
+        COALESCE(SUM("d"."amount"), 0) AS total_donation,
+        COALESCE(COUNT(DISTINCT "d"."userId"), 0) AS total_donor
+      FROM
+        "user_donations" "d"
+      WHERE
+        "d"."reason" IN (
+          '${DonationType.FUNDRAISER_FORM}',
+          '${DonationType.FUNDRAISER_PAGE}',
+          '${DonationType.INTEGRATION_CART_BANNER}',
+          '${DonationType.INTEGRATION_CART_DRAWER}',
+          '${DonationType.INTEGRATION_SALES_PORTION}'
+        )
+        AND DATE_TRUNC('day', "d"."created") BETWEEN '${start}' AND '${end}'
+      GROUP BY
+        EXTRACT(YEAR FROM "d"."created"),
+        EXTRACT(MONTH FROM "d"."created")
+        ${day_groupby}
+    )
+    SELECT
+      EXTRACT(YEAR FROM ds.dates) AS year,
+      EXTRACT(MONTH FROM ds.dates) AS month,
+      ${day_select}
+      COALESCE(gd.total_donation, 0) AS total_donation,
+      COALESCE(gd.total_donor, 0) AS total_donor
+    FROM
+      date_series ds
+    LEFT JOIN
+      grouped_donations gd
+    ON
+      EXTRACT(YEAR FROM ds.dates) = gd.year
+      AND EXTRACT(MONTH FROM ds.dates) = gd.month
+      ${left_join}
+    ORDER BY
+      year, month${order_by};`
+}
+
+export default async function (query: DateFilterQueryDto, isExport = false) {
+  try {
+    const data: any[] = await this.entityManager.query(queryBuilder(query))
+
+    if (isExport) {
+      const csvData = data.map((item: any) => ({
+        Year: item.year,
+        Month: item.month,
+        Day: item.day ? item.day : '',
+        'Total Donation': item.total_donation,
+        'Total Donor': item.total_donor,
+      }))
+
+      const csvExporter = new ExportToCsv({
+        showLabels: true,
+        useBom: true,
+        useKeysAsHeaders: true,
+      })
+
+      return csvExporter.generateCsv(csvData, true)
+    }
+
+    return data
+  } catch (error) {
+    return HandleErrors(error)
+  }
+}

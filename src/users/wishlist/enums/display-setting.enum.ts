@@ -1,0 +1,4 @@
+export enum DisplaySetting {
+  REMOVE_ITEM_FROM_LIST = 'REMOVE_ITEM_FROM_LIST',
+  MARK_AS_PURCHASED = 'MARK_AS_PURCHASED',
+}

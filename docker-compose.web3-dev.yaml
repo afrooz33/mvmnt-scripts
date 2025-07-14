@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  web3_api:
+    image: registry.digitalocean.com/mvmnts/mvmnt/web3-backend:latest
+    env_file:
+      - .env
+    restart: always
+    pull_policy: always
+    network_mode: host

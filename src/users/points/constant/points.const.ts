@@ -1,0 +1,3 @@
+export const POINTS_EXPIRY_DAYS = 150
+export const POINTS_DELIVERY_DAYS = 16
+export const POINT_RE2_TEMP_USER_EXPIRY_DAYS = 16

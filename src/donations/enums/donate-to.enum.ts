@@ -1,0 +1,4 @@
+export enum DonateTo {
+  NONPROFIT = 'NONPROFIT',
+  DONATION_PROJECT = 'DONATION_PROJECT',
+}

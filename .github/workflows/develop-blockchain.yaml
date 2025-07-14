@@ -1,0 +1,54 @@
+name: Build and Deploy develop-blockchain
+
+on:
+  push:
+    branches:
+      - feat/withdrawals
+
+env:
+  IMAGE_NAME: mvmnt/web3-backend:latest
+  AUTH_PRIVATE_KEY: ${{ secrets.WEB3_AUTH_PRIVATE_KEY }}
+
+jobs:
+  setup-build-publish-deploy:
+    name: Setup, Build, Publish, Deploy
+    runs-on: ubuntu-latest
+    environment: development
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build image
+        run: |
+          docker build . --file Dockerfile --tag $IMAGE_NAME \
+            --build-arg AUTH_PRIVATE_KEY="$AUTH_PRIVATE_KEY"
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DEV_DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Push image to digitalocean
+        run: |
+          doctl registry login
+          docker tag $IMAGE_NAME registry.digitalocean.com/mvmnts/$IMAGE_NAME
+          docker push registry.digitalocean.com/mvmnts/$IMAGE_NAME
+
+      - uses: appleboy/ssh-action@master
+        name: Deploy to server
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.WEB3_USERNAME }}
+          port: ${{ secrets.PORT }}
+          key: ${{ secrets.WEB3_SSHKEY }}
+          script: |
+            set -e
+            docker image prune --force --all --filter "until=24h"
+            cd /home/mvmnt_web3/mvmnt-backend
+            git reset --hard HEAD^1
+            git checkout develop-blockchain
+            git pull origin develop-blockchain
+            docker-compose -f docker-compose.web3-dev.yaml pull
+            docker-compose -f docker-compose.web3-dev.yaml down
+            docker-compose -f docker-compose.web3-dev.yaml up -d
+            set +e
