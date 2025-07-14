@@ -42,7 +42,7 @@ async function runStakeLPToken(brandId, amount, lockPeriod, userPrivateKey = nul
         
         // Load contracts
                         // Load StakingManager contract
-        const { StakingManagerABI } = require('./abi/StakingManager.abi.ts');
+        const { StakingManagerABI } = require('./abi/StakingManager.abi.js');
         const StakingManager = new ethers.Contract(stakingManagerAddress, StakingManagerABI, signer);
         
         // Get LP token address (assuming we have LPManager)
@@ -77,7 +77,7 @@ async function runStakeLPToken(brandId, amount, lockPeriod, userPrivateKey = nul
                 
                 // Check if user has enough LP tokens
                 // Load LPToken contract
-                const { IERC20ABI } = require('./abi/IERC20.abi.ts');
+                const { IERC20ABI } = require('./abi/IERC20.abi.js');
                 const LPToken = new ethers.Contract(poolAddress, IERC20ABI, signer);
                 const balance = await LPToken.balanceOf(await signer.getAddress());
                 console.log('💰 User LP Balance:', ethers.formatEther(balance), 'LP tokens');

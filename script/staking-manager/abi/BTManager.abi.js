@@ -1,4 +1,4 @@
-export default [
+const BTManagerABI = [
   { type: 'constructor', inputs: [], stateMutability: 'nonpayable' },
   {
     type: 'function',
@@ -722,4 +722,6 @@ export default [
     name: 'Unauthorized',
     inputs: [{ name: 'caller', type: 'address', internalType: 'address' }],
   },
-]
+];
+
+module.exports = { BTManagerABI }; 

@@ -41,23 +41,23 @@ async function runStakeBrandToken(brandId, amount, lockPeriod, userPrivateKey = 
         console.log('   - Lock Period:', lockDuration, 'seconds');
         
         // Load contracts
-                        // Load StakingManager contract
-        const { StakingManagerABI } = require('./abi/StakingManager.abi.ts');
+        // Load StakingManager contract
+        const { StakingManagerABI } = require('./abi/StakingManager.abi.js');
         const StakingManager = new ethers.Contract(stakingManagerAddress, StakingManagerABI, signer);
         
         // Get brand token address (assuming we have BTManager)
         const btManagerAddress = process.env.BRAND_MANAGER_ADDRESS;
         if (btManagerAddress) {
-                            // Load BTManager contract
-        const BTManagerABI = require('./abi/BTManager.abi.ts').default;
-        const BTManager = new ethers.Contract(btManagerAddress, BTManagerABI, signer);
+            // Load BTManager contract
+            const { BTManagerABI } = require('./abi/BTManager.abi.js');
+            const BTManager = new ethers.Contract(btManagerAddress, BTManagerABI, signer);
             try {
                 const brandTokenAddress = await BTManager.getBrandToken(brandId);
                 console.log('🪙 Brand Token Address:', brandTokenAddress);
                 
                 // Check if user has enough tokens
-                                // Load BrandToken contract
-        const { IERC20ABI } = require('./abi/IERC20.abi.ts');
+                // Load BrandToken contract
+                const { IERC20ABI } = require('./abi/IERC20.abi.js');
         const BrandToken = new ethers.Contract(brandTokenAddress, IERC20ABI, signer);
                 const balance = await BrandToken.balanceOf(await signer.getAddress());
                 console.log('💰 User Balance:', ethers.formatEther(balance), 'tokens');

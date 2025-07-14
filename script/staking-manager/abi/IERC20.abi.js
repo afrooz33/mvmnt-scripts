@@ -1,4 +1,4 @@
-export const IERC20ABI = [
+const IERC20ABI = [
   {
     type: 'function',
     name: 'name',
@@ -221,4 +221,6 @@ export const IERC20ABI = [
     ],
     anonymous: false,
   },
-] as const; 
+];
+
+module.exports = { IERC20ABI }; 

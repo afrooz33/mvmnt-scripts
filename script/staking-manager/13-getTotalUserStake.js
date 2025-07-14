@@ -36,7 +36,7 @@ async function runGetTotalUserStake(brandId, userAddress = null) {
         
         // Load contract
                         // Load StakingManager contract
-        const { StakingManagerABI } = require('./abi/StakingManager.abi.ts');
+        const { StakingManagerABI } = require('./abi/StakingManager.abi.js');
         const StakingManager = new ethers.Contract(stakingManagerAddress, StakingManagerABI, signer);
         
         console.log('⏳ Executing getTotalUserStake...');

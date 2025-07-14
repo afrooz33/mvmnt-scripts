@@ -37,7 +37,7 @@ async function runClaimReward(brandId, stakeId, userPrivateKey = null) {
         
         // Load contracts
                         // Load StakingManager contract
-        const { StakingManagerABI } = require('./abi/StakingManager.abi.ts');
+        const { StakingManagerABI } = require('./abi/StakingManager.abi.js');
         const StakingManager = new ethers.Contract(stakingManagerAddress, StakingManagerABI, signer);
         
         // Calculate pending reward before claiming

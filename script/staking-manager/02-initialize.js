@@ -8,7 +8,7 @@ const { ethers } = require('ethers');
 require('dotenv').config({
     path: "../../.env"
 });
-const { StakingManagerABI } = require('./abi/StakingManager.abi.ts');
+const { StakingManagerABI } = require('./abi/StakingManager.abi.js');
 
 async function runInitialize(btManagerAddress = null) {
     try {
