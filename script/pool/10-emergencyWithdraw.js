@@ -52,7 +52,7 @@ async function runEmergencyWithdraw(token, to, amount, userPrivateKey = null) {
         console.log('   - Amount to withdraw:', amount);
         
         // Load contract
-        const { PoolABI } = require('./abi/Pool.abi.ts');
+        const { PoolABI } = require('./abi/Pool.abi.js');
         const Pool = new ethers.Contract(poolAddress, PoolABI, signer);
         
         console.log('⏳ Sending transaction...');

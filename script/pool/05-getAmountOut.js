@@ -44,7 +44,7 @@ async function runGetAmountOut(isBuyToken, amountIn, userPrivateKey = null) {
         console.log('   - Amount In:', ethers.formatEther(amountInWei), buyToken ? 'stable' : 'tokens');
         
         // Load contract
-        const { PoolABI } = require('./abi/Pool.abi.ts');
+        const { PoolABI } = require('./abi/Pool.abi.js');
         const Pool = new ethers.Contract(poolAddress, PoolABI, signer);
         
         // Get token addresses

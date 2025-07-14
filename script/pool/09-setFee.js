@@ -38,7 +38,7 @@ async function runSetFee(newFee, userPrivateKey = null) {
         console.log('   - New fee amount:', newFee);
         
         // Load contract
-        const { PoolABI } = require('./abi/Pool.abi.ts');
+        const { PoolABI } = require('./abi/Pool.abi.js');
         const Pool = new ethers.Contract(poolAddress, PoolABI, signer);
         
         console.log('⏳ Sending transaction...');

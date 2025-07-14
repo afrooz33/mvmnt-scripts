@@ -47,7 +47,7 @@ async function runAllowance(owner, spender, userPrivateKey = null) {
         console.log('   - Spender address:', spender);
         
         // Load contract
-        const { PoolABI } = require('./abi/Pool.abi.ts');
+        const { PoolABI } = require('./abi/Pool.abi.js');
         const Pool = new ethers.Contract(poolAddress, PoolABI, signer);
         
         console.log('⏳ Executing...');

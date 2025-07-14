@@ -40,7 +40,7 @@ async function runBalanceOf(account, userPrivateKey = null) {
         console.log('   - Account address:', account);
         
         // Load contract
-        const { PoolABI } = require('./abi/Pool.abi.ts');
+        const { PoolABI } = require('./abi/Pool.abi.js');
         const Pool = new ethers.Contract(poolAddress, PoolABI, signer);
         
         console.log('⏳ Executing...');

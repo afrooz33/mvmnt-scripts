@@ -43,7 +43,7 @@ async function runRemoveLiquidity(lpAmount, minTokenAmount, minStableAmount, use
         console.log('   - Min Stable Amount:', ethers.formatEther(minStableAmountWei), 'stable');
         
         // Load contract
-        const { PoolABI } = require('./abi/Pool.abi.ts');
+        const { PoolABI } = require('./abi/Pool.abi.js');
         const Pool = new ethers.Contract(poolAddress, PoolABI, signer);
         
         // Check LP balance

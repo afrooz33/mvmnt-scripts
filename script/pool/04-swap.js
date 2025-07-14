@@ -47,7 +47,7 @@ async function runSwap(isBuyToken, amountIn, minAmountOut, userPrivateKey = null
         console.log('   - Min Amount Out:', ethers.formatEther(minAmountOutWei), buyToken ? 'tokens' : 'stable');
         
         // Load contract
-        const { PoolABI } = require('./abi/Pool.abi.ts');
+        const { PoolABI } = require('./abi/Pool.abi.js');
         const Pool = new ethers.Contract(poolAddress, PoolABI, signer);
         
         // Get token addresses
