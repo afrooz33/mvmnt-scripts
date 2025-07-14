@@ -46,7 +46,7 @@ async function runInitialize(btManager, stablecoin, poolImplementation, dexRoute
         console.log('   - DEX Router:', dexRouter);
         
         // Load contract
-        const LPManagerABI = require('./abi/LPManager.abi.ts').default;
+        const { LPManagerABI } = require('./abi/LPManager.abi.js');
         const LPManager = new ethers.Contract(lpManagerAddress, LPManagerABI, signer);
         
         console.log('⏳ Initializing LPManager contract...');

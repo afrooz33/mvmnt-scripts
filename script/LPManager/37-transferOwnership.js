@@ -40,7 +40,7 @@ async function runTransferOwnership(newOwner, userPrivateKey = null) {
         console.log('   - New owner address:', newOwner);
         
         // Load contract
-        const LPManagerABI = require('./abi/LPManager.abi.ts').default;
+        const { LPManagerABI } = require('./abi/LPManager.abi.js');
         const LPManager = new ethers.Contract(lpManagerAddress, LPManagerABI, signer);
         
         console.log('⏳ Sending transaction...');

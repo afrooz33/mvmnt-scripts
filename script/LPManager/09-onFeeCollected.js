@@ -43,7 +43,7 @@ async function runOnFeeCollected(brandId, feeAmount, userPrivateKey = null) {
         console.log('   - Fee amount collected:', feeAmount);
         
         // Load contract
-        const LPManagerABI = require('./abi/LPManager.abi.ts').default;
+        const { LPManagerABI } = require('./abi/LPManager.abi.js');
         const LPManager = new ethers.Contract(lpManagerAddress, LPManagerABI, signer);
         
         console.log('⏳ Sending transaction...');

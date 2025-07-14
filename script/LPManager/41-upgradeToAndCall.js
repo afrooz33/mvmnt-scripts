@@ -45,7 +45,7 @@ async function runUpgradeToAndCall(newImplementation, data, userPrivateKey = nul
         console.log('   - Call data:', data);
         
         // Load contract
-        const LPManagerABI = require('./abi/LPManager.abi.ts').default;
+        const { LPManagerABI } = require('./abi/LPManager.abi.js');
         const LPManager = new ethers.Contract(lpManagerAddress, LPManagerABI, signer);
         
         console.log('⏳ Sending transaction...');

@@ -41,7 +41,7 @@ async function runCreatePool(brandId, userPrivateKey = null) {
         console.log('   - Brand ID:', brandIdNum);
         
         // Load contract
-        const LPManagerABI = require('./abi/LPManager.abi.ts').default;
+        const { LPManagerABI } = require('./abi/LPManager.abi.js');
         const LPManager = new ethers.Contract(lpManagerAddress, LPManagerABI, signer);
         
         // Check if pool already exists

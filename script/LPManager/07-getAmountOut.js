@@ -48,7 +48,7 @@ async function runGetAmountOut(brandId, isBuyToken, amountIn, userPrivateKey = n
         console.log('   - Amount in:', amountIn);
         
         // Load contract
-        const LPManagerABI = require('./abi/LPManager.abi.ts').default;
+        const { LPManagerABI } = require('./abi/LPManager.abi.js');
         const LPManager = new ethers.Contract(lpManagerAddress, LPManagerABI, signer);
         
         console.log('⏳ Executing...');

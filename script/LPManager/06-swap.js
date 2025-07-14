@@ -53,7 +53,7 @@ async function runSwap(brandId, isBuyToken, amountIn, minAmountOut, userPrivateK
         console.log('   - Minimum amount out:', minAmountOut);
         
         // Load contract
-        const LPManagerABI = require('./abi/LPManager.abi.ts').default;
+        const { LPManagerABI } = require('./abi/LPManager.abi.js');
         const LPManager = new ethers.Contract(lpManagerAddress, LPManagerABI, signer);
         
         console.log('⏳ Sending transaction...');

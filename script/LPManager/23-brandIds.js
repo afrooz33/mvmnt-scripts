@@ -38,7 +38,7 @@ async function runBrandIds(index, userPrivateKey = null) {
         console.log('   - Index:', index);
         
         // Load contract
-        const LPManagerABI = require('./abi/LPManager.abi.ts').default;
+        const { LPManagerABI } = require('./abi/LPManager.abi.js');
         const LPManager = new ethers.Contract(lpManagerAddress, LPManagerABI, signer);
         
         console.log('⏳ Executing...');

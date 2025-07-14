@@ -52,7 +52,7 @@ async function runEmergencyWithdraw(token, to, amount, userPrivateKey = null) {
         console.log('   - Amount to withdraw:', amount);
         
         // Load contract
-        const LPManagerABI = require('./abi/LPManager.abi.ts').default;
+        const { LPManagerABI } = require('./abi/LPManager.abi.js');
         const LPManager = new ethers.Contract(lpManagerAddress, LPManagerABI, signer);
         
         console.log('⏳ Sending transaction...');

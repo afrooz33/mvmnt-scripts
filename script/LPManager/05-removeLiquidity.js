@@ -53,7 +53,7 @@ async function runRemoveLiquidity(brandId, lpAmount, minTokenAmount, minStableAm
         console.log('   - Minimum stable amount:', minStableAmount);
         
         // Load contract
-        const LPManagerABI = require('./abi/LPManager.abi.ts').default;
+        const { LPManagerABI } = require('./abi/LPManager.abi.js');
         const LPManager = new ethers.Contract(lpManagerAddress, LPManagerABI, signer);
         
         console.log('⏳ Sending transaction...');

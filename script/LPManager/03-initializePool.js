@@ -48,7 +48,7 @@ async function runInitializePool(brandId, tokenAmount, stableAmount, userPrivate
         console.log('   - Stable amount:', stableAmount);
         
         // Load contract
-        const LPManagerABI = require('./abi/LPManager.abi.ts').default;
+        const { LPManagerABI } = require('./abi/LPManager.abi.js');
         const LPManager = new ethers.Contract(lpManagerAddress, LPManagerABI, signer);
         
         console.log('⏳ Sending transaction...');

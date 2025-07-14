@@ -45,7 +45,7 @@ async function runUserLPTokens(brandId, user, userPrivateKey = null) {
         console.log('   - User address:', user);
         
         // Load contract
-        const LPManagerABI = require('./abi/LPManager.abi.ts').default;
+        const { LPManagerABI } = require('./abi/LPManager.abi.js');
         const LPManager = new ethers.Contract(lpManagerAddress, LPManagerABI, signer);
         
         console.log('⏳ Executing...');

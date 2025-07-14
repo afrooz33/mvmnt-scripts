@@ -49,7 +49,7 @@ async function runStakeLPToken(brandId, amount, lockPeriod, userPrivateKey = nul
         const lpManagerAddress = process.env.LP_MANAGER;
         if (lpManagerAddress) {
             // Load LPManager contract
-            const LPManagerABI = require('./abi/LPManager.abi.ts').default;
+            const { LPManagerABI } = require('./abi/LPManager.abi.js');
             const LPManager = new ethers.Contract(lpManagerAddress, LPManagerABI, signer);
             try {
                 const poolResult = await LPManager.getPool(brandId);

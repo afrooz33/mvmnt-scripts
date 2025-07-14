@@ -40,7 +40,7 @@ async function runUpdateBTManager(btManager, userPrivateKey = null) {
         console.log('   - New BT manager address:', btManager);
         
         // Load contract
-        const LPManagerABI = require('./abi/LPManager.abi.ts').default;
+        const { LPManagerABI } = require('./abi/LPManager.abi.js');
         const LPManager = new ethers.Contract(lpManagerAddress, LPManagerABI, signer);
         
         console.log('⏳ Sending transaction...');
