@@ -1,5 +1,0 @@
-export enum PhaseType {
-  OPEN_TO_ALL = 'OPEN_TO_ALL',
-  WHITELISTED = 'WHITELISTED',
-  CONDITIONAL = 'CONDITIONAL',
-}

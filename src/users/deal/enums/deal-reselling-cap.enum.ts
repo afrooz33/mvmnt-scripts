@@ -1,8 +1,0 @@
-import { Status } from '@app/src/shared/enums'
-
-export enum DealResellingCap {
-  NONE = Status.NONE,
-  LIMIT_RESELLING_PERIOD = Status.LIMIT_RESELLING_PERIOD,
-  LIMIT_SALE_AMOUNT_PER_VARIANT = Status.LIMIT_SALE_AMOUNT_PER_VARIANT,
-  LIMIT_SALE_QUANTITY_PER_VARIANT = Status.LIMIT_SALE_QUANTITY_PER_VARIANT,
-}

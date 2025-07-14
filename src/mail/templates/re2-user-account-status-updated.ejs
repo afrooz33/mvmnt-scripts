@@ -1,9 +1,0 @@
-<p>Hello <%= username %>,</p>
-
-<% if (action === 'account_blocked') { %>
-  <p>Your recurring donation has been stopped because the RE2 user is deactivated by the admin.</p>
-<% } else { %>
-  <p>Your account has been <%= action %>.</p>
-<% } %>
-
-<%- include('./partials/footer'); %>

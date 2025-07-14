@@ -1,3 +1,0 @@
-import { POINTS_STATUS, POINTS_TYPE, POINTS_REASON } from './user-points.enum'
-
-export { POINTS_REASON, POINTS_STATUS, POINTS_TYPE }

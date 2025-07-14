@@ -1,75 +1,86 @@
-# mvmnt-backend
+# MVMNT Blockchain Scripts
 
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+This repository contains blockchain interaction scripts for the MVMNT ecosystem, including LP Manager, Pool, and Staking Manager contracts.
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Structure
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Installation
-
-```bash
-$ npm install
+```
+script/
+├── LPManager/          # LP Manager contract scripts
+├── pool/              # Pool contract scripts  
+└── staking-manager/   # Staking Manager contract scripts
 ```
 
-## Running the app
+## Setup
 
+1. Install dependencies:
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm install
 ```
 
-## Test
-
+2. Copy environment template:
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+cp env.example .env
 ```
 
-## Support
+3. Configure your `.env` file with your blockchain settings:
+- `BLOCKCHAIN_PROVIDER_RPCURL`: Your RPC endpoint
+- `ADMIN_KEY`: Your private key
+- Contract addresses for your deployed contracts
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Usage
 
-## Stay in touch
+Each script folder contains individual JavaScript files that can be run directly:
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### LP Manager Scripts
+```bash
+cd script/LPManager
+node 01-initialize.js <btManager> <stablecoin> <poolImplementation> <dexRouter>
+node 02-createPool.js <brandId>
+node 03-initializePool.js <brandId>
+```
 
-## License
+### Pool Scripts
+```bash
+cd script/pool
+node 01-initialize.js <brandId> <brandToken> <stablecoin> <manager>
+node 02-addLiquidity.js <brandId> <tokenAmount> <stableAmount>
+node 03-removeLiquidity.js <brandId> <lpAmount>
+```
 
-Nest is [MIT licensed](LICENSE).
+### Staking Manager Scripts
+```bash
+cd script/staking-manager
+node 01-constructor.js <btManager> <lpManager>
+node 02-initialize.js <stakingConfig>
+node 03-setStakingConfig.js <config>
+```
+
+## Script Index Files
+
+Each folder contains an `index.js` file that provides a class-based interface for all functions:
+
+```javascript
+const LPManager = require('./script/LPManager/index.js');
+const Pool = require('./script/pool/index.js');
+const StakingManager = require('./script/staking-manager/index.js');
+
+// Initialize instances
+const lpManager = new LPManager();
+const pool = new Pool();
+const stakingManager = new StakingManager();
+
+// Use functions
+await lpManager.execute('initialize', btManager, stablecoin, poolImplementation, dexRouter);
+await pool.execute('addLiquidity', brandId, tokenAmount, stableAmount);
+await stakingManager.execute('stakeBrandToken', brandId, amount);
+```
+
+## Dependencies
+
+- `ethers`: Ethereum library for blockchain interactions
+- `dotenv`: Environment variable management
+
+## Security
+
+⚠️ **Important**: Never commit your `.env` file or expose your private keys. Always use environment variables for sensitive data.

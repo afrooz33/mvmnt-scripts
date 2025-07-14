@@ -1,8 +1,0 @@
-export enum ExchangeStatus {
-  PENDING = 'PENDING',
-  APPROVED = 'APPROVED',
-  REJECTED = 'REJECTED',
-  SHIPPED = 'SHIPPED',
-  RECEIVED = 'RECEIVED',
-  COMPLETED = 'COMPLETED',
-}
