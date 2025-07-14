@@ -1,0 +1,5 @@
+export enum ResellingStarRewardType {
+  TRANSACTION = 'TRANSACTION',
+  DONATION = 'DONATION',
+  CONTRIBUTION = 'CONTRIBUTION',
+}

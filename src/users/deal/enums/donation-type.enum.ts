@@ -1,0 +1,12 @@
+import { DealProperty } from '@app/src/shared/enums'
+
+export enum DonationType {
+  FIXED_PER_ORDER = DealProperty.FIXED_PER_ORDER,
+  PERCENTAGE_PER_ORDER = DealProperty.PERCENTAGE_PER_ORDER,
+  WINNING_BID_ROUND_UP = DealProperty.WINNING_BID_ROUND_UP,
+  FIXED_PER_ENTRY = DealProperty.FIXED_PER_ENTRY,
+  FIXED_PER_ITEM = DealProperty.FIXED_PER_ITEM,
+  FIXED_PERCENTAGE_PER_ITEM = DealProperty.FIXED_PERCENTAGE_PER_ITEM,
+  ROUND_UP_SUB_TOTAL = DealProperty.ROUND_UP_SUB_TOTAL,
+  MONHTLY_RECURRING = DealProperty.MONHTLY_RECURRING,
+}

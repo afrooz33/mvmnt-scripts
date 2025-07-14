@@ -1,0 +1,15 @@
+import { Status } from '@app/src/shared/enums'
+
+export enum ReturnExchangeStatus {
+  CLOSED = Status.CLOSED,
+  SHIPPED = Status.SHIPPED,
+  APPROVED = Status.APPROVED,
+  REFUNDED = Status.REFUNDED,
+  REJECTED = Status.REJECTED,
+  COMPLETED = Status.COMPLETED,
+  REQUESTED = Status.REQUESTED,
+  PROCESSING = Status.PROCESSING,
+  EXCHANGE_SHIPPED = Status.EXCHANGE_SHIPPED,
+  PARTIALLY_SHIPPED = Status.PARTIALLY_SHIPPED,
+  PARTIALLY_APPROVED = Status.PARTIALLY_APPROVED,
+}

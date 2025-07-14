@@ -1,0 +1,16 @@
+export default [
+  'International Aid',
+  'Maternal & Child Support',
+  "Children's Education",
+  'Disability & Elderly Care',
+  'Employment Service',
+  'Human Right',
+  'Agriculture Support',
+  'Refugee Aid',
+  "Women's Empowerment",
+  'Community Education',
+  'Health & Medical Care',
+  'Environmental Conservation',
+  'Wildlife Conservation',
+  'Disaster Relief',
+]

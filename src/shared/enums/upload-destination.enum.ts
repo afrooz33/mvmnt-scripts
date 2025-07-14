@@ -1,0 +1,15 @@
+export enum UploadDestination {
+  DEAL = 'deal',
+  BANNER = 'banner',
+  WISHLIST = 'wishlist',
+  DEAL_REPORT = 'deal_report',
+  SHIPPING_METHOD = 'shipping_method',
+  ACTIVITY_REPORT = 'activity_report',
+  DONATION_PROJECT = 'donation_project',
+  USER_VERIFICATION = 'user_verification',
+  ZENDESK_ATTACHMENTS = 'zendesk_attachments',
+  USER_PROFILE_PICTURE = 'user_profile_picture',
+  FUNDRAISER_FORM_PAGE = 'fundraiser_form_page',
+  CONTACT_REQUEST_ATTACHMENT = 'contact_request_attachment',
+  BRAND_TOKEN_LOGO = 'brand_token_logo',
+}
